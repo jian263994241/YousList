@@ -2354,3 +2354,25 @@ zdnet.co.kr##ul.ad_list
 zdnet.com##section.leader-bottom
 zdnet.com##section.leader-top
 zdnet.com##section.mpu
+! my list
+||cpro.baidustatic.com^$script
+||candou.com/i/2000/
+||yy58ju.com^$script
+||pagead2.googlesyndication.com^
+||tanx.com^$domain=~1688.com|~alimama.com|~taobao.com|~tmall.com
+||dup.baidustatic.com/js/
+/data/attachment/ad/^$image
+###bottomAd
+##.adsbygoogle
+##.wp.a_f
+~125.la##.a_mu
+~52pojie.cn##.a_mu
+~it168.com##.a_mu
+~aircn.org##.wp.a_t
+~steamcn.com##.wp.a_t
+##a[href*=".com/?Extend="]
+##a[href*="/?aff="]
+##a[href*=".com/Register?a="]
+##a[href*="/?intr="]
+##div#hkpic
+##div.pg_forumdisplay>#wp

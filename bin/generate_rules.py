@@ -83,7 +83,8 @@ class FilterParser:
             trigger['url-filter'] = self.DOMAIN_PREFIX + url.replace('.', '\\.')
         else:
             trigger['url-filter'] = '.*'
-        trigger['load-type'] = []
+        # trigger['load-type'] = []
+        trigger['url-filter-is-case-sensitive'] = True
 
         action = collections.OrderedDict()
         action['type'] = 'css-display-none'
@@ -173,6 +174,8 @@ class FilterParser:
                     opt_dict['unless-domain'] = unless_domain
             elif opt_key == 'script':
                 opt_dict['resource-type'] = ['script']
+            elif opt_key == 'image':
+                opt_dict['resource-type'] = ['image']
             else:
                 raise ValueError('Cannot handle this option: ' + opt_key)
         return opt_dict

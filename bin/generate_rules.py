@@ -25,8 +25,9 @@ class FilterParser:
                 orig_pkg = obj[0]
                 self.pkg['id'] = orig_pkg['id']
                 self.pkg['name'] = orig_pkg['name']
-                for rule in orig_pkg['rules']:
-                    self.id_dict[rule['name']] = rule['id']
+                if 'rules' in orig_pkg :
+                    for rule in orig_pkg['rules']:
+                        self.id_dict[rule['name']] = rule['id']
             finally:
                 f.close()
         if 'id' not in self.pkg:
@@ -83,7 +84,7 @@ class FilterParser:
             trigger['url-filter'] = self.DOMAIN_PREFIX + url.replace('.', '\\.')
         else:
             trigger['url-filter'] = '.*'
-        # trigger['load-type'] = []
+
         trigger['url-filter-is-case-sensitive'] = True
 
         action = collections.OrderedDict()
@@ -123,13 +124,15 @@ class FilterParser:
                 .replace('.', '\\.') \
                 .replace('*', '.*') \
                 .replace('?', '\\?')
-        trigger['load-type'] = []
+
+        trigger['url-filter-is-case-sensitive'] = True
 
         opt_dict = self._parse_options(options)
         trigger.update(opt_dict)
         trigger_ordered_keys = ['url-filter',
                                 'resource-type',
-                                'load-type',
+                                # 'load-type',
+                                'url-filter-is-case-sensitive',
                                 'if-domain',
                                 'unless-domain']
         trigger_ordered_dict = collections.OrderedDict()
@@ -148,6 +151,7 @@ class FilterParser:
 
     def _parse_options(self, options):
         opt_dict = {}
+        resourceType = []
         if options:
             options = options.split(',')
         else:
@@ -165,7 +169,7 @@ class FilterParser:
                     if domain.startswith('~'):
                         unless_domain.append(domain.lstrip('~'))
                     else:
-                        if_domain.append(domain)
+                        if_domain.append('*' + domain)
                 if len(if_domain) and len(unless_domain):
                     raise ValueError('Cannot handle this domains: ' + opt_val)
                 elif len(if_domain):
@@ -173,13 +177,31 @@ class FilterParser:
                 elif len(unless_domain):
                     opt_dict['unless-domain'] = unless_domain
             elif opt_key == 'script':
-                opt_dict['resource-type'] = ['script']
+                resourceType.append('script')
             elif opt_key == 'image':
-                opt_dict['resource-type'] = ['image']
+                resourceType.append('image')
+            elif opt_key == 'media':
+                resourceType.append('media')
+            elif opt_key == 'document':
+                resourceType.append('document')
+            elif opt_key == 'svgdocument':
+                resourceType.append('svg-document')
+            elif opt_key == 'xmlhttprequest':
+                resourceType.append('raw')
+            elif opt_key == 'popup':
+                resourceType.append('popup')
+            elif opt_key == 'font':
+                resourceType.append('font')
+            elif opt_key == 'stylesheet':
+                resourceType.append('style-sheet')
             else:
+                # ['subdocument','object-subrequest','ping','websocket','elemhide','generichide','genericblock']
                 raise ValueError('Cannot handle this option: ' + opt_key)
+
+        opt_dict['resource-type'] = resourceType
+
         return opt_dict
 
-orig_pkg = os.path.join(root, 'Rules.1blockpkg')
+orig_pkg = os.path.join(root, 'mypkg.1blockpkg')
 parser = FilterParser(basepkg=orig_pkg)
 parser.parse()

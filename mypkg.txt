@@ -1,0 +1,9 @@
+||yes1.feng.com^$domain=feng.com,image
+||ubmcmm.baidustatic.com
+tieba.baidu.com###pblist > li[class]:not(.j_post_list_item)
+tieba.baidu.com##div[class][lgoinprompt="prompt"]
+tieba.baidu.com##.tl_shadow + * + li[class]:not([class="tl_shadow"])
+tieba.baidu.com###j_light_see_index
+tieba.baidu.com###pblist > li[class]:not(.j_post_list_item)
+/adsense/*
+/adscdn.

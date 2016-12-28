@@ -1,9 +1,12 @@
 ||yes1.feng.com^$domain=feng.com,image
 ||ubmcmm.baidustatic.com
+||fex.bdstatic.com/hunter/^$script
 tieba.baidu.com###pblist > li[class]:not(.j_post_list_item)
 tieba.baidu.com##div[class][lgoinprompt="prompt"]
-tieba.baidu.com##.tl_shadow + * + li[class]:not([class="tl_shadow"])
+tieba.baidu.com##.tl_shadow :matches(a.ti_item:not(.j_common), a.ti_item:not(.j_common) ~ .ti_infos, .special-sign)
 tieba.baidu.com###j_light_see_index
 tieba.baidu.com###pblist > li[class]:not(.j_post_list_item)
+tieba.baidu.com##.j_zan_reply.zan_reply
+tieba.baidu.com###index-app-overlay
 /adsense/*
 /adscdn.

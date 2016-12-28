@@ -195,7 +195,7 @@ class FilterParser:
             elif opt_key == 'stylesheet':
                 resourceType.append('style-sheet')
             else:
-                # ['subdocument','object-subrequest','ping','websocket','elemhide','generichide','genericblock']
+                # ['subdocument','object-subrequest']
                 raise ValueError('Cannot handle this option: ' + opt_key)
 
         opt_dict['resource-type'] = resourceType
